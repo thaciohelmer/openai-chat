@@ -4,9 +4,6 @@ import "dotenv/config";
 const ACCOUNT_SID = process.env.ACCOUNT_SID;
 const ACCOUNT_TOKEN = process.env.ACCOUNT_TOKEN;
 
-console.log(ACCOUNT_SID);
-console.log(ACCOUNT_TOKEN);
-
 const client = twilio(ACCOUNT_SID, ACCOUNT_TOKEN);
 
 export const sendMessage = async (message: string, senderId: string) => {
