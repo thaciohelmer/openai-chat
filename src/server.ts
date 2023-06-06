@@ -1,5 +1,6 @@
 import express from "express";
 import { sendMessage } from "./utils/message-sender.util";
+import { gptMessage } from "./utils/chat.utils";
 
 const app = express();
 const PORT = 3000;
@@ -8,10 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/webhook", async (req, res) => {
-  const { From } = req.body;
-  console.log(req.body);
-
-  await sendMessage("Hello from Twilio!", From);
+  const { From, Body } = req.body;
+  const response = await gptMessage(Body);
+  await sendMessage(response.text, From);
 });
 
 app.listen(PORT, () => {
